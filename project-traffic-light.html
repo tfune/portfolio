@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <meta content="width=device-width, initial-scale=1.0">
+    <title>Trevor Fune | Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Trevor Fune</h1>
+        <p>Electrical & Computer Engineering Student</p>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Arduino Traffic Light Controller</h2>
+
+        <p>
+            <img src="images/traffic-light.jpg" alt="Arduino Traffic Light setup" width="600">
+        </p>
+
+        <p>
+            A four-way traffic light control system built on the Arduino Mega 2560, featuring
+            pedestrian crossing and emergency override modes. This project simulates real-world
+            intersection logic using a finite state machine (FSM) with non-blocking timing, 
+            demonstrating strong embedded systems desgin.
+        </p>
+
+        <p>Demo Video: <a href="https://www.youtube.com/watch?v=WH35ogzfD9o">Watch on YouTube</a></p>
+
+        <h3>Project Overview</h3>
+
+        <p>
+            The system models a real intersection with four traffic light heads (North-South 
+            and East-West), each with red, yellow, and green LEDs. Light phases are controlled
+            using the <code>millis()</code> function for non-blocking timing, allowing the controller
+            to remain responsive to inputs at all times.
+        </p>
+
+        <h3>User Interaction</h3>
+        <ul>
+            <li><strong>Pedestrian Button:</strong> Requests a safe crossing phase, indicated by a white LED.</li>
+            <li><strong>Emergency Button:</strong> Activates a flashing all-red mode to simulate emergency</li>
+        </ul>
+
+        <h3>Features</h3>
+        <ul>
+            <li>Four-way traffic light simulation (12 LEDs total)</li>
+            <li>Non-blocking timing using <code>millis()</code></li>
+            <li>Finite state machine (FSM) for clean logic flow</li>
+            <li>Interrupt-driven emergency mode (instant response)</li>
+            <li>Software-debounced pedestrian and emergency input</li>
+            <li>Modular design for easy hardware or logic expansion</li>
+        </ul>
+
+        <h3>System Logic</h3>
+        <p>Normal Cycle:</p>
+        <ul>
+            <li>North-South Green &rarr; 7 seconds</li>
+            <li>North-South Yellow &rarr; 3 seconds</li>
+            <li>All Red &rarr; 1 second</li>
+            <li>East-West Green &rarr; 7 seconds</li>
+            <li>East-West Yellow &rarr; 3 seconds</li>
+            <li>All Red &rarr; 1 second</li>
+        </ul>
+        
+        <p>If User Input Detected:</p>
+        <ul>
+            <li>If pedestrian button pressed &rarr; pedestrian light and all red for 7 seconds (during next all red state)</li>
+            <li>If emergency button pressed &rarr; flash all-red until button is pressed again</li>
+        </ul>
+
+        <h3>Hardware Used</h3>
+        <ul>
+            <li>Arduino Mega 2560 - Main controller board</li>
+            <li>Breadboards - 2 interconnected for four signal heads</li>
+            <li>LEDs - 12 for traffic lights + 1 pedestrian signal</li>
+            <li>Resistors - 330-470Ω per LED</li>
+            <li>Push Buttons - Pedestrian & Emergency modes</li>
+            <li> Jumper Wires and USB Cable</li>
+        </ul>
+
+        <p><a href="projects.html">&larr; Back to Projects</a></p>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Trevor Fune</p>
+    </footer>
+</body>
+</html>
