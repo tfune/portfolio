@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport">
-    <meta content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trevor Fune | Home</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -14,7 +13,7 @@
         <p>Electrical & Computer Engineering Student</p>
 
         <nav>
-            <a href="index.html">Home</a>
+            <a href="index.html" class="active">Home</a>
             <a href="about.html">About</a>
             <a href="projects.html">Projects</a>
             <a href="contact.html">Contact</a>
@@ -22,16 +21,15 @@
     </header>
 
     <section class="hero">
-        <h1>Welcome to my portfolio website!</h1>
+        <h1>Embedded Systems Portfolio</h1>
 
         <p>
-            I design and build microcontroller-based systems using C/C++ with
-            a focus on real-time control, hardware integration, and firmware
-            development.
+            I build microcontroller-based embedded systems using C/C++, real-time control,
+            hardware integration, sensors, actuators, and finite state machine design.
         </p>
 
-        <a href="projects.html">View Projects</a>
-        <a href="contact.html">Contact Me</a>
+        <a href="projects.html" class="button">View Projects</a>
+        <a href="contact.html" class="button">Contact Me</a>
     </section>
 
     <section>
@@ -51,24 +49,42 @@
             <h3>Arduino Traffic Light Controller</h3>
 
             <p>
-                Finte state machine-based traffic light system using Arduino Mega
+                Finite state machine-based traffic light system using Arduino Mega
                 2560 with non-blocking timing, pedestrian input, and emergency
                 override mode.
             </p>
 
-            <a href="project-traffic-light.html">View Project &rarr;</a>
+            <p class="tags">
+                <span>Arduino Mega</span>
+                <span>C++</span>
+                <span>FSM</span>
+                <span>Real-Time Control</span>
+                <span>Interrupts</span>
+            </p>
+
+            <a href="project-traffic-light.html" class="button">View Project &rarr;</a>
         </div>
     </section>
 
     <section>
         <h2>Skills</h2>
 
+        <h3>Embedded Software</h3>
         <ul>
             <li>Embedded C/C++</li>
-            <li>Arduino/Microcontrollers</li>
-            <li>Finite State Machines (FSM)</li>
+            <li>Finite State Machines</li>
+            <li>Interrupt Handling</li>
+            <li>Non-blocking Timing with millis()</li>
+            <li>Modular Firmware Design</li>
+        </ul>
+
+        <h3>Hardware Integration</h3>
+        <ul>
+            <li>Arduino Mega 2560</li>
+            <li>Sensors and Actuators</li>
+            <li>Push Button Inputs</li>
+            <li>LED Control</li>
             <li>Hardware-Software Integration</li>
-            <li>Real-Time Systems</li>
         </ul>
     </section>
 

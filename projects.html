@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport">
-    <meta content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trevor Fune | Projects</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -16,23 +15,41 @@
         <nav>
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
-            <a href="projects.html">Projects</a>
+            <a href="projects.html" class="active">Projects</a>
             <a href="contact.html">Contact</a>
         </nav>
     </header>
 
     <section>
         <h2>Projects</h2>
+        <div class="project-grid">
+            <div class="project">
+                <h3><a href="project-traffic-light.html">Arduino Traffic Light Controller</a></h3>
+                <p><img src="images/traffic-light.jpg" alt="Arduino Traffic Light setup" width="400"></p>
 
-        <div class="project">
-            <h3><a href="project-traffic-light.html">Arduino Traffic Light Controller</a></h3>
-            <p><img src="images/traffic-light.jpg" alt="Arduino Traffic Light setup" width="400"></p>
-            <p>
-                Embedded systems project implementing a real-time four-way traffic light controller
-                on Arduino Mega 2560. Uses finite state machine design, non-blocking millis() timing, 
-                and asynchronous input handling for pedestrian and emergency override functionality.
-            </p>
-            <p><a href="project-traffic-light.html">&rarr; View Project Details</a></p>
+                <p>
+                    Embedded systems project implementing a real-time four-way traffic light controller
+                    on Arduino Mega 2560. Uses finite state machine design, non-blocking millis() timing, 
+                    and asynchronous input handling for pedestrian and emergency override functionality.
+                </p>
+
+                <p class="tags">
+                    <span>Arduino Mega</span>
+                    <span>C++</span>
+                    <span>FSM</span>
+                    <span>Real-Time Control</span>
+                    <span>Interrupts</span>
+                </p>
+
+                <p><a href="project-traffic-light.html" class="button">&rarr; View Project Details</a></p>
+
+                <p>
+                    Source Code:
+                    <a href="https://github.com/tfune/traffic-light-controller" target="_blank" class="button">
+                        View on GitHub
+                    </a>
+                </p>
+            </div>
         </div>
     </section>
 

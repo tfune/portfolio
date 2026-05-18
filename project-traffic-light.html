@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport">
-    <meta content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trevor Fune | Traffic Light Project</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -16,7 +15,7 @@
         <nav>
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
-            <a href="projects.html">Projects</a>
+            <a href="projects.html" class="active">Projects</a>
             <a href="contact.html">Contact</a>
         </nav>
     </header>
@@ -32,10 +31,17 @@
             A four-way traffic light control system built on the Arduino Mega 2560, featuring
             pedestrian crossing and emergency override modes. This project simulates real-world
             intersection logic using a finite state machine (FSM) with non-blocking timing, 
-            demonstrating strong embedded systems desgin.
+            demonstrating strong embedded systems design.
         </p>
 
-        <p>Demo Video: <a href="https://www.youtube.com/watch?v=WH35ogzfD9o">Watch on YouTube</a></p>
+        <p>Demo Video: <a href="https://www.youtube.com/watch?v=WH35ogzfD9o" class="button">Watch on YouTube</a></p>
+
+        <p>
+            Source Code:
+            <a href="https://github.com/tfune/traffic-light-controller" target="_blank" class="button">
+                View on GitHub
+            </a>
+        </p>
 
         <h3>Project Overview</h3>
 
@@ -49,7 +55,7 @@
         <h3>User Interaction</h3>
         <ul>
             <li><strong>Pedestrian Button:</strong> Requests a safe crossing phase, indicated by a white LED.</li>
-            <li><strong>Emergency Button:</strong> Activates a flashing all-red mode to simulate emergency</li>
+            <li><strong>Emergency Button:</strong> Activates a flashing all-red mode to simulate emergency response</li>
         </ul>
 
         <h3>Features</h3>
@@ -90,7 +96,6 @@
         </ul>
 
         <p><a href="projects.html">&larr; Back to Projects</a></p>
-
     </section>
 
     <footer>

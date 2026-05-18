@@ -4,7 +4,7 @@ body {
     padding: 0;
     line-height: 1.6;
     background-color: #e2e8f0;
-    color: #222
+    color: #222;
 }
 
 header {
@@ -21,7 +21,7 @@ header h1 {
 
 header p {
     margin: 5px 0 15px 0;
-    color: #cbd5e1
+    color: #cbd5e1;
 }
 
 nav {
@@ -33,6 +33,13 @@ nav a {
     text-decoration: none;
     margin: 0 12px;
     font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+nav a.active {
+    color: #38bdf8;
+    border-bottom: 2px solid #38bdf8;
+    padding-bottom: 4px;
 }
 
 nav a:hover {
@@ -45,7 +52,7 @@ section {
     padding: 20px;
     background: white;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgpa(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 h2 {
@@ -71,14 +78,31 @@ h2 {
     margin: 0 auto 20px auto;
 }
 
-.hero a {
+.button {
     display: inline-block;
-    margin: 10px;
-    padding: 10px 16px;
-    background: #2563eb;
+    padding: 8px 14px;
+    background: #334155;
     color: white;
     text-decoration: none;
     border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.button:hover {
+    background-color: #0369a1;
+    color: white;
+}
+
+.hero .button {
+    padding: 10px 16px;
+    margin: 10px;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
 }
 
 .project {
@@ -98,17 +122,43 @@ h2 {
     margin-top: 0;
 }
 
-.project a {
-    color: #2563eb;
+.project a:not(.button) {
+    color: #1e3a8a;
     text-decoration: none;
     font-weight: bold;
 }
 
-.project a:hover {
+.project a:not(.button):hover {
+    color: #2563eb;
     text-decoration: underline;
 }
 
+.project img {
+    width: 100%;
+    max-width: 400px;
+}
+
+.tags {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.tags span {
+    display: inline-block;
+    background-color: #e0f2fe;
+    color: #0369a1;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 10px;
+    margin: 4px 4px 4px 0;
+    border-radius: 999px;
+}
+
 a {
+    color: #1e3a8a;
+}
+
+a:hover {
     color: #2563eb;
 }
 
@@ -129,4 +179,32 @@ footer {
     background-color: #334155;
     color: white;
     margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 32px;
+    }
+
+    nav a {
+        display: block;
+        margin: 8px 0;
+    }
+
+    section {
+        margin: 20px 12px;
+        padding: 18px;
+    }
+
+    .hero {
+        padding: 40px 20px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
 }
