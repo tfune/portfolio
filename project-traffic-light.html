@@ -23,20 +23,55 @@
     <section>
         <h2>Arduino Traffic Light Controller</h2>
 
-        <p>
-            <img src="images/traffic-light.jpg" alt="Arduino Traffic Light setup" width="550">
-        </p>
+        <div class="carousel">
 
-        <p>
-            A four-way traffic light control system built on the Arduino Mega 2560, featuring
-            pedestrian crossing and emergency override modes. This project simulates real-world
-            intersection logic using a finite state machine (FSM) with non-blocking timing, 
-            demonstrating strong embedded systems design.
-        </p>
+            <button class="carousel-button prev">&#10094;</button>
+
+            <img id="carousel-image"
+                src="images/traffic_light_overview.jpg"
+                alt="Arduino Traffic Light setup">
+
+            <button class="carousel-button next">&#10095;</button>
+
+        </div>
+
+            <h3>Project Overview</h3>
+
+            <p>
+                This project is a real-time four-way traffic light controller built on the
+                Arduino Mega 2560. It simulates an intersection with separate North-South
+                and East-West traffic phases, pedestrian crossing support, and an emergency
+                override mode.
+            </p>
+
+            <p>
+                The system uses a finite state machine architecture to organize the traffic
+                light sequence into clear operating states. Each state controls a specific
+                phase of the intersection, such as North-South green, North-South yellow,
+                all-red transitions, East-West green, East-West yellow, pedestrian crossing,
+                and emergency override behavior.
+            </p>
+
+            <p>
+                Instead of using blocking delays, the firmware relies on non-blocking
+                <code>millis()</code>-based timing. This allows the controller to continuously
+                monitor pedestrian and emergency inputs while the normal traffic cycle is
+                running, improving responsiveness and better reflecting real embedded
+                system behavior.
+            </p>
+
+            <p>
+                The emergency mode demonstrates asynchronous event handling by allowing the
+                system to interrupt the normal traffic sequence and enter a flashing all-red
+                safety state. Pedestrian requests are handled without disrupting the current
+                phase immediately, allowing the system to transition safely during the next
+                all-red period.
+            </p>
 
         <div class="project-links">
 
             <a href="https://www.youtube.com/watch?v=WH35ogzfD9o"
+            targer="_blank"
             class="button">
                 Watch Demo
             </a>
@@ -49,21 +84,6 @@
 
         </div>
 
-        <h3>Project Overview</h3>
-
-        <p>
-            The system models a real intersection with four traffic light heads (North-South 
-            and East-West), each with red, yellow, and green LEDs. Light phases are controlled
-            using the <code>millis()</code> function for non-blocking timing, allowing the controller
-            to remain responsive to inputs at all times.
-        </p>
-
-        <h3>User Interaction</h3>
-        <ul>
-            <li><strong>Pedestrian Button:</strong> Requests a safe crossing phase, indicated by a white LED.</li>
-            <li><strong>Emergency Button:</strong> Activates a flashing all-red mode to simulate emergency response</li>
-        </ul>
-
         <h3>Features</h3>
         <ul>
             <li>Four-way traffic light simulation (12 LEDs total)</li>
@@ -74,8 +94,45 @@
             <li>Modular design for easy hardware or logic expansion</li>
         </ul>
 
-        <h3>System Logic</h3>
-        <p>Normal Cycle:</p>
+        <h3>Challenges Solved</h3>
+
+            <h4>Non-Blocking Timing Architecture</h4>
+
+            <p>
+                The traffic light sequence was designed without using blocking delay functions.
+                Instead, the firmware uses <code>millis()</code>-based timing so the system can
+                continue checking for pedestrian and emergency inputs while normal light phases
+                are running.
+            </p>
+
+            <h4>Finite State Machine Control</h4>
+
+            <p>
+                The project uses a finite state machine to separate each traffic phase into a
+                clear operating state. This makes the control logic easier to understand,
+                debug, and expand while keeping the intersection behavior predictable.
+            </p>
+
+            <h4>Emergency Override Handling</h4>
+
+            <p>
+                Emergency mode allows the system to interrupt the normal traffic sequence and
+                switch into a flashing all-red safety state. This demonstrates real-time event
+                handling where safety-related input must take priority over normal operation.
+            </p>
+
+            <h4>Reliable Button Input</h4>
+
+            <p>
+                Pedestrian and emergency inputs require debouncing so that one physical button
+                press is not detected as multiple rapid presses. This improves reliability and
+                helps ensure the controller responds consistently to user input.
+            </p>
+
+        <h3>System Operation</h3>
+
+        <h4>Normal Traffic Cycle</h4>
+
         <ul>
             <li>North-South Green &rarr; 7 seconds</li>
             <li>North-South Yellow &rarr; 3 seconds</li>
@@ -85,20 +142,35 @@
             <li>All Red &rarr; 1 second</li>
         </ul>
         
-        <p>If User Input Detected:</p>
+        <h4>User Input Handling</h4>
         <ul>
             <li>If pedestrian button pressed &rarr; pedestrian light and all red for 7 seconds (during next all red state)</li>
             <li>If emergency button pressed &rarr; flash all-red until button is pressed again</li>
         </ul>
 
         <h3>Hardware Used</h3>
+
         <ul>
-            <li>Arduino Mega 2560 - Main controller board</li>
-            <li>Breadboards - 2 interconnected for four signal heads</li>
-            <li>LEDs - 12 for traffic lights + 1 pedestrian signal</li>
-            <li>Resistors - 330-470Ω per LED</li>
-            <li>Push Buttons - Pedestrian & Emergency modes</li>
-            <li> Jumper Wires and USB Cable</li>
+            <li>Arduino Mega 2560 microcontroller</li>
+            <li>Four simulated traffic signal heads using red, yellow, and green LEDs</li>
+            <li>Dedicated pedestrian crossing indicator LED</li>
+            <li>Pedestrian request push button</li>
+            <li>Emergency override push button</li>
+            <li>Current-limiting resistors for all LED outputs</li>
+            <li>Dual breadboard intersection layout with jumper wire interconnects</li>
+            <li>USB power and programming interface</li>
+        </ul>
+
+        <h3>Embedded Concepts Demonstrated</h3>
+        <ul>
+            <li>Finite state machines (FSMs)</li>
+            <li>Non-blocking timing using <code>millis()</code></li>
+            <li>Interrupt-driven event handling</li>
+            <li>Input debouncing</li>
+            <li>Real-time embedded control</li>
+            <li>Embedded GPIO programming</li>
+            <li>Asynchronous event handling</li>
+            <li>Hardware/software integration</li>
         </ul>
 
         <p><a href="projects.html">&larr; Back to Projects</a></p>
@@ -107,5 +179,39 @@
     <footer>
         <p>&copy; 2026 Trevor Fune</p>
     </footer>
+
+    <script>
+
+        const images = [
+            "images/traffic_light_overview.jpg",
+            "images/traffic_light_on.png",
+            "images/traffic_light_close.png"
+        ];
+
+        let currentImage = 0;
+
+        const carouselImage = document.getElementById("carousel-image");
+
+        document.querySelector(".next").addEventListener("click", () => {
+            currentImage++;
+
+            if(currentImage >= images.length) {
+                currentImage = 0;
+            }
+
+            carouselImage.src = images[currentImage];
+        });
+
+        document.querySelector(".prev").addEventListener("click", () => {
+            currentImage--;
+
+            if(currentImage < 0) {
+                currentImage = images.length - 1;
+            }
+
+            carouselImage.src = images[currentImage];
+        });
+
+    </script>
 </body>
 </html>

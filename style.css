@@ -55,6 +55,10 @@ section {
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
+section h2:first-child {
+    margin-top: 0;
+}
+
 h2 {
     border-bottom: 2px solid #e2e8f0;
     padding-bottom: 8px;
@@ -127,11 +131,17 @@ h2 {
 
 .project h3 {
     margin-top: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 12px;
 }
 
 section h3 {
     margin-top: 40px;
-    color: #1e293b;
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #e2e8f0;
+    color: #334155;
 }
 
 section p, section ul {
@@ -152,6 +162,32 @@ section p, section ul {
 .project img {
     width: 100%;
     max-width: 400px;
+}
+
+.focus-grid {
+    display: flex;
+    gap: 20px;
+}
+
+.focus-card {
+    flex: 1;
+    padding: 18px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: #f8fafc;
+}
+
+.focus-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-bottom: 0;
+    border-bottom: none;
+    color: #1e293b;
+}
+
+.focus-card p {
+    margin-bottom: 0;
+    color: #475569;
 }
 
 .tags {
@@ -265,5 +301,18 @@ footer {
 
     .hero p {
         font-size: 16px;
+    }
+
+    .project-links {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .project-links .button {
+        text-align: center;
+    }
+
+    .focus-grid {
+        flex-direction: column;
     }
 }
