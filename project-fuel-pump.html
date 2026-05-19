@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trevor Fune | Embedded Fuel Pump System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Trevor Fune</h1>
+        <p>Electrical & Computer Engineering Student</p>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html" class="active">Projects</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Embedded Fuel Pump System</h2>
+
+        <div class="carousel">
+
+            <button class="carousel-button prev">&#10094;</button>
+
+            <img id="carousel-image"
+                src="images/fuel_pump_system_overview.png"
+                alt="Embedded Fuel Pump System">
+
+            <button class="carousel-button next">&#10095;</button>
+
+        </div>
+        
+        <h3>Project Overview</h3>
+
+        <p>
+            This project is an embedded fuel pump simulation system designed to model
+            the core behavior of an automated fuel dispensing system. It uses an
+            Arduino Mega 2560 as the main controller, with a keypad for fuel selection,
+            an OLED display for user feedback, a flow sensor for measuring dispensed
+            fluid, and a MOSFET-controlled diaphragm pump for fuel delivery simulation.
+        </p>
+
+        <p>
+            The firmware is organized around a finite state machine with separate
+            states for readiness, fuel selection, active pumping, transaction completion,
+            and error handling. This structure keeps the control logic clear while
+            allowing the system to respond to user input, sensor feedback, and fault
+            conditions in real time.
+        </p>
+
+        <p>
+            To make the project more modular and closer to professional embedded
+            firmware design, the system separates major hardware responsibilities into
+            dedicated driver-style classes, including input handling, display output,
+            flow sensing, and pump control. The flow sensor uses interrupt-driven pulse
+            counting with ISR-safe atomic access, while the pump driver manages
+            MOSFET-based switching and pump state tracking.
+        </p>
+
+        <p>
+            Safety and reliability features were also included, such as pump timeout
+            protection, flow fault detection, and an ERROR state that disables the pump
+            when abnormal conditions are detected. These features demonstrate practical
+            embedded systems concepts such as real-time control, hardware/software
+            integration, fault recovery, and sensor calibration.
+        </p>
+
+        <div class="project-links">
+
+            <a href="https://youtu.be/fImaIKWJgsk?si=xv2-76FXsg5NL78J"
+            class="button">
+                Watch Demo
+            </a>
+
+            <a href="https://github.com/tfune/embedded-fuel-pump-system"
+            target="_blank"
+            class="button">
+                View GitHub
+            </a>
+
+        </div>
+
+        <h3>Features</h3>
+
+        <ul>
+            <li>Finite state machine architecture</li>
+            <li>Interrupt-driven flow sensor handling</li>
+            <li>ISR-safe atomic pulse access</li>
+            <li>Dedicated FlowSensor and PumpDriver abstractions</li>
+            <li>MOSFET-based diaphragm pump control</li>
+            <li>OLED user interface with keypad input</li>
+            <li>Real-time fuel and cost calculation</li>
+            <li>Pump timeout safety protection</li>
+            <li>Flow sensor fault detection</li>
+            <li>ERROR state handling and recovery</li>
+        </ul>
+
+        <h3>Challenges Solved</h3>
+
+        <h4>ISR-Safe Flow Sensor Handling</h4>
+
+        <p>
+            The flow sensor uses interrupt-driven pulse counting to measure dispensed
+            fluid in real time. Because the pulse counter is shared between the interrupt
+            service routine and the main application loop, directly reading the value
+            could result in inconsistent data access. To solve this, the firmware uses
+            atomic access protection when reading shared pulse data, ensuring reliable
+            and accurate fuel measurement.
+        </p>
+
+        <h4>Modular Driver Architecture</h4>
+
+        <p>
+            As the project grew in complexity, the firmware was reorganized into
+            dedicated hardware abstraction modules including <code>FlowSensor</code>,
+            <code>PumpDriver</code>, <code>InputHandler</code>, and <code>Display</code>.
+            This improved code organization, simplified debugging, and made the system
+            easier to maintain and expand.
+        </p>
+
+        <h4>Fault Detection and Safety Protection</h4>
+
+        <p>
+            Several safety features were implemented to improve system reliability.
+            Pump timeout protection automatically disables the pump if runtime exceeds
+            a maximum limit, while flow fault detection monitors whether the pump is
+            active without corresponding sensor pulses. These protections help detect
+            abnormal conditions such as disconnected sensors, clogged tubing, or
+            dry-running pump behavior.
+        </p>
+
+        <h4>Real-Time Embedded Control</h4>
+
+        <p>
+            The firmware was designed using a finite state machine architecture with
+            non-blocking system behavior, allowing the application to continuously
+            monitor user input, pump state, flow sensor data, and fault conditions in
+            real time. This approach improves responsiveness and more closely reflects
+            professional embedded systems design practices.
+        </p>
+
+        <h3>System Architecture</h3>
+
+        <p>
+            <img src="images/fuel_pump_system_diagram.png"
+                 alt="System Architecture Diagram"
+                 width="650">
+        </p>
+
+        <ul>
+            <li><strong>FlowSensor:</strong> interrupt-driven pulse counting, fuel calculation, and calibration handling</li>
+            <li><strong>PumpDriver:</strong> MOSFET GPIO control and pump state tracking</li>
+            <li><strong>InputHandler:</strong> keypad scanning and trigger button handling</li>
+            <li><strong>Display:</strong> OLED rendering and state-specific UI screens</li>
+        </ul>
+
+        <h3>State Machine</h3>
+
+        <p>
+            <img src="images/fuel_pump_state_machine.png"
+                 alt="State Machine Diagram"
+                 width="550">
+        </p>
+
+        <ul>
+            <li><strong>READY</strong> → waits for user input</li>
+            <li><strong>FUEL_SELECTION</strong> → selects fuel pricing</li>
+            <li><strong>PUMPING</strong> → controls pump operation and monitors safety conditions</li>
+            <li><strong>COMPLETE</strong> → displays transaction summary</li>
+            <li><strong>ERROR</strong> → disables pump and displays fault information</li>
+        </ul>
+
+        <h3>Hardware Used</h3>
+
+        <ul>
+            <li>Arduino Mega 2560</li>
+            <li>SSD1306 OLED Display</li>
+            <li>4x4 Matrix Keypad</li>
+            <li>YF-S201C Water Flow Sensor</li>
+            <li>12V Diaphragm Water Pump</li>
+            <li>MOSFET-based switching circuit</li>
+            <li>Push button</li>
+        </ul>
+
+        <h3>Embedded Concepts Demonstrated</h3>
+
+        <ul>
+            <li>Finite state machines</li>
+            <li>Interrupt service routines</li>
+            <li>Atomic data access</li>
+            <li>Hardware abstraction layers</li>
+            <li>Fault detection and recovery</li>
+            <li>Embedded GPIO control</li>
+            <li>Sensor calibration</li>
+            <li>Hardware/software integration</li>
+        </ul>
+
+        <p>
+            <a href="projects.html">&larr; Back to Projects</a>
+        </p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Trevor Fune</p>
+    </footer>
+
+    <script>
+
+        const images = [
+            "images/fuel_pump_system_overview.png",
+            "images/fuel_pump_hardware.png",
+            "images/fuel_pump_oled.png"
+        ];
+
+        let currentImage = 0;
+
+        const carouselImage = document.getElementById("carousel-image");
+
+        document.querySelector(".next").addEventListener("click", () => {
+            currentImage++;
+
+            if(currentImage >= images.length) {
+                currentImage = 0;
+            }
+
+            carouselImage.src = images[currentImage];
+        });
+
+        document.querySelector(".prev").addEventListener("click", () => {
+            currentImage--;
+
+            if(currentImage < 0) {
+                currentImage = images.length - 1;
+            }
+
+            carouselImage.src = images[currentImage];
+        });
+
+    </script>
+</body>
+</html>
