@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trevor Fune | Raspberry Pi Burglar Alarm System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Trevor Fune</h1>
+    <p>Electrical & Computer Engineering Student</p>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html" class="active">Projects</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<section>
+
+    <h2>Raspberry Pi Burglar Alarm System</h2>
+
+    <div class="carousel">
+
+        <button class="carousel-button prev">&#10094;</button>
+
+        <img id="carousel-image"
+             src="images/burglar_alarm_system_overview.jpg"
+             alt="Raspberry Pi Burglar Alarm System">
+
+        <button class="carousel-button next">&#10095;</button>
+
+    </div>
+
+    <h3>Project Overview</h3>
+
+    <p>
+        This project implements a standalone burglar alarm system using a
+        Raspberry Pi 4, PIR motion sensor, thermistor-based temperature
+        monitoring circuit, ADS7830 I²C ADC, keypad input, and a 16x2 I²C LCD.
+        The system allows users to arm and disarm monitoring functions while
+        continuously tracking environmental conditions and sensor activity.
+    </p>
+
+    <p>
+        Motion detection and temperature monitoring operate independently,
+        allowing the system to trigger different alarm outputs depending on
+        the detected condition. The user interface provides immediate feedback
+        through the LCD display while the keypad enables direct interaction
+        with the system.
+    </p>
+
+    <p>
+        The project demonstrates practical embedded Linux development,
+        peripheral interfacing, sensor integration, alarm state management,
+        and hardware/software integration while emphasizing reliability and
+        troubleshooting of real hardware systems.
+    </p>
+
+    <div class="project-links">
+
+        <a href="https://youtu.be/phs9qyAsqX4"
+            target="_blank"
+            class="button">
+            Watch Demo
+        </a>
+
+        <a href="https://github.com/tfune/burglar-alarm-system"
+           target="_blank"
+           class="button">
+            View GitHub
+        </a>
+
+    </div>
+
+    <h3>Features</h3>
+
+    <ul>
+        <li>Keypad-controlled arm/disarm operation</li>
+        <li>PIR motion sensor monitoring</li>
+        <li>Thermistor-based temperature change detection</li>
+        <li>ADS7830 I²C ADC integration</li>
+        <li>16x2 I²C LCD user interface</li>
+        <li>Independent motion and temperature alarms</li>
+        <li>Configurable alarm thresholds</li>
+        <li>LCD startup reliability improvements</li>
+        <li>Makefile-based build system</li>
+        <li>Modular project organization</li>
+    </ul>
+
+    <h3>Challenges Solved</h3>
+
+    <h4>LCD Initialization Reliability</h4>
+
+    <p>
+        During testing, the LCD occasionally powered up displaying only white
+        boxes despite remaining visible on the I²C bus. Troubleshooting
+        included bus verification, LCD-only testing, and isolation of
+        application software from hardware initialization behavior.
+    </p>
+
+    <p>
+        Initialization retry logic was added to improve startup reliability
+        and allow automatic recovery from intermittent LCD startup failures.
+    </p>
+
+    <h4>Environmental Change Detection</h4>
+
+    <p>
+        Instead of relying on a fixed temperature threshold, the system
+        records a baseline ADC value during startup and compares future
+        readings against that baseline. This allows meaningful environmental
+        changes to be detected regardless of ambient starting conditions.
+    </p>
+
+    <h4>Hardware Integration and Debugging</h4>
+
+    <p>
+        The project required integration of GPIO devices, I²C peripherals,
+        ADC-based sensor monitoring, keypad scanning, and LCD communication.
+        Extensive troubleshooting and testing were performed to validate
+        reliable operation across all subsystems.
+    </p>
+
+    <h3>System Architecture</h3>
+
+    <p>
+        <img src="images/burglar_alarm_block_diagram.png"
+             alt="System Architecture Diagram"
+             width="650">
+    </p>
+
+    <ul>
+        <li><strong>Keypad Interface:</strong> User arm/disarm commands</li>
+        <li><strong>PIR Sensor:</strong> Motion detection monitoring</li>
+        <li><strong>ADS7830:</strong> ADC conversion for thermistor readings</li>
+        <li><strong>LCD Interface:</strong> User status display and feedback</li>
+        <li><strong>Alarm Outputs:</strong> Buzzer and LED indicators</li>
+    </ul>
+
+    <h3>System Operation</h3>
+
+    <h4>DISARMED</h4>
+
+    <ul>
+        <li>Motion alarms disabled</li>
+        <li>Temperature alarms disabled</li>
+        <li>Buzzer off</li>
+        <li>LED off</li>
+    </ul>
+
+    <h4>ARMED</h4>
+
+    <ul>
+        <li>PIR sensor actively monitored</li>
+        <li>Temperature readings periodically sampled</li>
+        <li>Motion detection activates buzzer</li>
+        <li>Temperature changes activate LED</li>
+    </ul>
+
+    <h3>Hardware Used</h3>
+
+    <ul>
+        <li>Raspberry Pi 4 Model B</li>
+        <li>PIR Motion Sensor</li>
+        <li>ADS7830 I²C ADC</li>
+        <li>Thermistor Voltage Divider</li>
+        <li>16x2 I²C LCD with PCF8574 Backpack</li>
+        <li>4x4 Matrix Keypad</li>
+        <li>Active Buzzer</li>
+        <li>Status LED</li>
+    </ul>
+
+    <h3>Embedded Concepts Demonstrated</h3>
+
+    <ul>
+        <li>GPIO interfacing</li>
+        <li>I²C communication</li>
+        <li>ADC-based sensor monitoring</li>
+        <li>Embedded user interfaces</li>
+        <li>Keypad scanning and debouncing</li>
+        <li>State-based alarm control</li>
+        <li>Hardware initialization</li>
+        <li>Reliability improvements</li>
+        <li>Build automation with Makefiles</li>
+        <li>Hardware/software integration</li>
+        <li>Embedded debugging and troubleshooting</li>
+    </ul>
+
+    <h3>Future Improvements</h3>
+
+    <ul>
+        <li>PIN-protected arming and disarming</li>
+        <li>Alarm event logging</li>
+        <li>Additional fault diagnostics</li>
+        <li>Audible alarm patterns for different fault types</li>
+    </ul>
+
+    <p>
+        <a href="projects.html">&larr; Back to Projects</a>
+    </p>
+
+</section>
+
+<footer>
+    <p>&copy; 2026 Trevor Fune</p>
+</footer>
+
+<script>
+
+const images = [
+    "images/burglar_alarm_system_overview.jpg",
+    "images/burglar_alarm_armed_state.jpg",
+    "images/burglar_alarm_close_up.jpg"
+];
+
+let currentImage = 0;
+
+const carouselImage = document.getElementById("carousel-image");
+
+document.querySelector(".next").addEventListener("click", () => {
+    currentImage++;
+
+    if(currentImage >= images.length) {
+        currentImage = 0;
+    }
+
+    carouselImage.src = images[currentImage];
+});
+
+document.querySelector(".prev").addEventListener("click", () => {
+    currentImage--;
+
+    if(currentImage < 0) {
+        currentImage = images.length - 1;
+    }
+
+    carouselImage.src = images[currentImage];
+});
+
+</script>
+
+</body>
+</html>
