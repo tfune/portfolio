@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trevor Fune | STM32 Golf Caddy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Trevor Fune</h1>
+        <p>Electrical & Computer Engineering Student</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html" class="active">Projects</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section>
+        <h2>STM32 Golf Caddy <span style="font-size:0.55em; font-weight:normal; color:#64748b;">— In Progress</span></h2>
+
+        <div class="carousel">
+
+            <button class="carousel-button prev">&#10094;</button>
+
+            <img id="carousel-image"
+                 src="images/golf_caddy_golf_screen.jpeg"
+                 alt="STM32 Golf Caddy prototype">
+
+            <button class="carousel-button next">&#10095;</button>
+
+        </div>
+
+        <h3>Project Overview</h3>
+        <p>
+            The STM32 Golf Caddy is a personal embedded systems project I started to expand my 
+            practical experience with microcontroller firmware and hardware integration while 
+            building something related to one of my favorite hobbies: golf. Rather than developing 
+            a project solely as a technical exercise, my goal is to build a portable device that I 
+            would actually use on the golf course.
+        </p>
+
+        <p>
+            The project is built around an STM32U083RC microcontroller and is being developed 
+            incrementally as I learn and integrate new embedded concepts. The current prototype 
+            combines environmental sensing and an OLED user interface over I²C, with future development 
+            planned for GPS-based distance measurements, battery monitoring, a complete user interface, 
+            and eventually a custom PCB and portable enclosure.
+        </p>
+
+        <p>
+            Throughout the project, I am focusing on writing modular embedded C, developing peripheral drivers, 
+            integrating and debugging hardware, and using tools such as a logic analyzer and multimeter to diagnose 
+            system behavior. Each new feature is intended to introduce another aspect of embedded system development 
+            while moving the prototype toward a complete device I can use during a round of golf.
+        </p>
+
+        <p class="tags">
+            <span>STM32</span>
+            <span>Embedded C</span>
+            <span>I2C</span>
+            <span>BME280</span>
+            <span>SSD1309 OLED</span>
+            <span>STM32 HAL</span>
+            <span>Debugging</span>
+        </p>
+
+        <h3>Current Progress</h3>
+        <ul>
+            <li><strong>STM32U083RC bring-up:</strong> configured the NUCLEO-U083RC development platform in STM32CubeIDE/CubeMX.</li>
+            <li><strong>BME280 sensor driver:</strong> implemented I2C communication, device identification, calibration coefficient retrieval, and compensation of raw temperature, humidity, and pressure data.</li>
+            <li><strong>SSD1309 OLED driver:</strong> implemented display initialization, framebuffer management, text rendering, and periodic display updates.</li>
+            <li><strong>I2C hardware integration:</strong> integrated the BME280 and OLED on the shared I2C bus using PB8/PB9.</li>
+            <li><strong>Hardware debugging:</strong> used a multimeter and logic analyzer to troubleshoot power and I2C behavior during peripheral integration.</li>
+        </ul>
+
+        <h3>Current Prototype Architecture</h3>
+        <ul>
+            <li><strong>Controller:</strong> STM32 NUCLEO-U083RC</li>
+            <li><strong>Environmental Sensor:</strong> BME280 via I2C</li>
+            <li><strong>Display:</strong> 2.42-inch 128x64 SSD1309 OLED via I2C</li>
+            <li><strong>Firmware:</strong> Embedded C using STM32 HAL</li>
+            <li><strong>Development:</strong> STM32CubeIDE and STM32CubeMX</li>
+            <li><strong>Debugging:</strong> ST-LINK, logic analyzer, multimeter</li>
+        </ul>
+
+        <h3>Engineering Work Highlight: BME280 Driver</h3>
+        <p>
+            I developed the BME280 interface in C using STM32 HAL I2C functions.
+            The firmware reads device-specific calibration coefficients and applies
+            the required compensation calculations to convert raw ADC measurements
+            into usable temperature, humidity, and pressure values. This work
+            strengthened my understanding of datasheet-driven driver development,
+            register-level peripheral communication, and debugging embedded sensor
+            interfaces.
+        </p>
+
+        <h3>Engineering Work Highlight: OLED Display</h3>
+        <p>
+            The SSD1309 display is driven through a framebuffer-based OLED driver. The firmware
+            initializes the display, writes commands and display data over I2C, renders text using
+            a bitmap font, and transfers the framebuffer to the screen. The current status screen
+            updates once per second with live sensor information, providing a foundation for the
+            future golf-course user interface.
+        </p>
+
+        <h3>Debugging & Validation</h3>
+        <p>
+            Peripheral integration has also been used as a practical debugging exercise. During
+            OLED and I2C bring-up, I investigated display failures and unstable behavior by checking
+            supply voltage, continuity/resistance, wiring, and digital bus activity. A logic analyzer
+            is now part of the development workflow for inspecting I2C transactions and validating
+            communication between the STM32 and connected peripherals.
+        </p>
+
+        <h3>Planned Features</h3>
+        <ul>
+            <li>GPS integration using an Adafruit PA1616D receiver over UART</li>
+            <li>Distance to the front, center, and back of the green</li>
+            <li>Hole number, strokes per hole, and running score tracking</li>
+            <li>Round and hole timers</li>
+            <li>Battery voltage/percentage monitoring using the STM32 ADC</li>
+            <li>Portable LiPo-powered operation</li>
+            <li>Expanded button-driven user interface</li>
+            <li>Custom PCB and enclosure after prototype validation</li>
+        </ul>
+
+        <p><strong>Status:</strong> Active development — BME280 sensing and SSD1309 display integration are operational; GPS and battery monitoring are next.</p>
+
+        <p><a href="projects.html">&larr; Back to Projects</a></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Trevor Fune</p>
+    </footer>
+
+    <script>
+        const images = [
+            "images/golf_caddy_golf_screen.jpeg",
+            "images/golf_caddy_status_screen.jpg"
+        ];
+
+        let currentImage = 0;
+
+        const carouselImage = document.getElementById("carousel-image");
+
+        document.querySelector(".next").addEventListener("click", () => {
+            currentImage++;
+
+            if(currentImage >= images.length) {
+                currentImage = 0;
+            }
+
+            carouselImage.src = images[currentImage];
+        });
+
+        document.querySelector(".prev").addEventListener("click", () => {
+            currentImage--;
+
+            if(currentImage < 0) {
+                currentImage = images.length - 1;
+            }
+
+            carouselImage.src = images[currentImage];
+        });
+
+    </script>
+</body>
+</html>
