@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Off-Grid Location Sharing System capstone: nRF52840 firmware, GNSS, LoRa, IMU heading, OLED interface, and verified outdoor performance.">
+    <title>Trevor Fune | Off-Grid Location Sharing System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Trevor Fune</h1>
+        <p>Electrical &amp; Computer Engineering Student</p>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html" class="active">Projects</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Off-Grid Location Sharing System</h2>
+
+        <div class="carousel">
+
+            <button class="carousel-button prev">&#10094;</button>
+
+            <img id="carousel-image"
+                src="images/off-grid-tracking.png"
+                alt="Off-Grid Location Sharing System tracking screen">
+
+            <button class="carousel-button next">&#10095;</button>
+
+        </div> 
+
+        <p class="tags project-tech-tags">
+            <span>nRF52840</span><span>C++</span><span>PlatformIO</span><span>LoRa</span>
+            <span>GNSS</span><span>IMU</span><span>I²C</span><span>UART</span><span>State Machine</span>
+        </p>
+
+        <h3>Key Results</h3>
+        <div class="project-results" aria-label="Key verified results">
+            <div><strong>3 devices</strong><span>Simultaneous location sharing</span></div>
+            <div><strong>958 m</strong><span>Maximum demonstrated communication range</span></div>
+            <div><strong>24+ hours</strong><span>Verified battery-powered operation</span></div>
+        </div>
+
+        <h3>Project Overview</h3>
+        <p>
+            Designed and built a portable, three-device embedded system that
+            allows group members to locate one another without cellular service
+            or internet access. Each device integrates a microcontroller, GNSS
+            receiver, LoRa transceiver, IMU, OLED display, rotary encoder, and
+            rechargeable LiPo battery. The microcontroller communicates with
+            the GNSS receiver and LoRa transceiver over UART and with the IMU
+            and OLED over I²C.
+        </p>
+        <p>
+            Devices periodically exchange GNSS coordinates over LoRa and
+            calculate the distance and direction to a selected group member.
+            The OLED interface displays this information using an IMU-based
+            directional arrow. The system also supports one-hop relaying,
+            allowing an intermediate device to forward location packets when
+            direct communication is unavailable.
+        </p>
+
+        <figure class="project-figure">
+            <img src="images/off-grid-level-one.png"
+                alt="Level 1 functional diagram showing the system components and their connections">
+            <figcaption>Level 1 Functional Diagram</figcaption>
+        </figure>
+
+        <div class="project-image-grid">
+            <figure class="project-figure">
+                <img src="images/off-grid-perfboard.png"
+                    alt="Labeled perfboard prototype showing the integrated hardware components">
+                <figcaption>Perfboard Prototype</figcaption>
+            </figure>
+
+            <figure class="project-figure">
+                <img src="images/off-grid-breadboard.png"
+                    alt="Breadboard prototype used for hardware development and testing">
+                <figcaption>Breadboard Prototype</figcaption>
+            </figure>
+        </div>
+
+        <h3>My Contributions — User Interface and Device Control</h3>
+        <ul>
+            <li><strong>IMU and heading:</strong> Integrated the BNO08x orientation sensor, corrected for its physical mounting orientation, and supported device-relative directional tracking.</li>
+            <li><strong>Display and input:</strong> Integrated the 128×64 SH1106 OLED and KY-040 rotary encoder to enable group-member selection and real-time tracking feedback.</li>
+            <li><strong>Firmware state machine:</strong> Implemented the STARTUP, MEMBER_LIST, and TRACKING user-interface flow, including button navigation and unavailable-location feedback.</li>
+            <li><strong>One-hop LoRa relaying:</strong> Implemented forwarding of location packets through an intermediate device, including hop-count limits and duplicate detection to prevent repeated forwarding.</li>
+            <li><strong>Hardware integration and debugging:</strong> Worked on module initialization feedback, peripheral bring-up, and troubleshooting intermittent display and startup behavior.</li>
+        </ul>
+
+        <p>
+            <strong>Team responsibilities:</strong> My teammate, Sebastian Kolczynski, focused on GNSS
+            integration and position processing, distance and bearing calculations, and direct LoRa
+            communication. System integration and verification were team efforts.
+        </p>
+
+        <h3>Firmware Design</h3>
+        <p>
+            The firmware was developed in C++ using the Arduino framework and
+            PlatformIO. A finite state machine (FSM) manages device operation,
+            beginning with component initialization and error handling.
+            After successful initialization, the device displays a startup
+            screen before allowing users to select a group member and enter
+            tracking mode. If location data becomes unavailable or outdated,
+            the device transitions to a Location Unavailable state and
+            automatically resumes tracking when valid data is restored.
+            The rotary encoder provides navigation between the member list
+            and tracking interface.
+        </p>
+
+        <figure class="project-figure">
+            <img src="images/off-grid-state-diagram.png"
+                alt="Firmware state machine showing device initialization, member selection, tracking, and unavailable-location handling">
+            <figcaption>Firmware State Machine</figcaption>
+        </figure>
+
+        <p>
+            During tracking, the firmware verifies that both the local GNSS
+            position and selected group member's location are valid and recent.
+            If either is unavailable, the device displays a Location Unavailable
+            screen. Otherwise, it calculates the distance and bearing to the
+            selected member, then combines the bearing with the IMU heading
+            to determine the relative arrow angle. The firmware also checks
+            IMU accuracy before displaying the tracking information.
+            This process repeats continuously to provide updated distance
+            and direction feedback.
+        </p>
+
+        <figure class="project-figure">
+            <img src="images/off-grid-tracking-flowchart.png"
+                alt="Tracking flowchart showing location validation, distance and bearing calculations, and directional display updates">
+            <figcaption>Tracking Process Flowchart</figcaption>
+        </figure>
+
+        <p>
+            Each device broadcasts location packets containing its device ID,
+            sequence number, GNSS coordinates, and hop count at randomized
+            intervals of 1.8–2.2 seconds to reduce packet collisions.
+            Receiving devices validate incoming packets, reject duplicates,
+            and store location data by source device ID. When direct
+            communication is unavailable, one-hop relaying allows an
+            intermediate device to forward packets after a randomized
+            100–300 ms delay. Relayed packets preserve the original source
+            information while incrementing the hop count, and packets
+            with a hop count of one are not forwarded again.
+        </p>
+
+        <figure class="project-figure">
+            <img src="images/off-grid-direct-communication.png"
+                alt="Direct LoRa communication between two devices without an intermediate relay">
+            <figcaption>Direct Communication</figcaption>
+        </figure>
+
+        <figure class="project-figure">
+            <img src="images/off-grid-relay.png"
+                alt="One-hop LoRa relaying where an intermediate device forwards location data between two devices">
+            <figcaption>One-Hop Relaying</figcaption>
+        </figure>
+
+        <h3>Verification Results</h3>
+        <p>
+            Unit, integration, and acceptance tests evaluated sensor functionality, inter-device
+            communication, user interaction, and measurable engineering requirements.
+        </p>
+        
+        <div class="results-table-wrap">
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Test / Requirement</th>
+                        <th>Verified Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Distance accuracy (≥50 m, open sky)</td>
+                        <td>Errors of 1.4 m and 0.3 m; within ±10 m requirement</td>
+                    </tr>
+                    <tr>
+                        <td>Direction accuracy (≥50 m, open sky)</td>
+                        <td>Errors of 2°, 4°, and 7.4°; within ±12° requirement</td>
+                    </tr>
+                    <tr>
+                        <td>Three-device operation and one-hop relaying</td>
+                        <td>Demonstrated with correct source identification</td>
+                    </tr>
+                    <tr>
+                        <td>Communication range</td>
+                        <td>Successful at 958 m; 1 km requirement partially verified</td>
+                    </tr>
+                    <tr>
+                        <td>Battery-powered operation</td>
+                        <td>More than 24 hours without recharging</td>
+                    </tr>
+                    <tr>
+                        <td>Size and weight</td>
+                        <td>174 g; 90 × 70 × 49 mm — within specified limits</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <p>
+            The system met all engineering requirements except the 1 km
+            communication range target, with a maximum demonstrated range
+            of 958 m. Verification testing confirmed accurate distance and
+            direction tracking, reliable three-device operation, one-hop
+            relaying, and over 24 hours of battery-powered operation.
+        </p>
+
+        <h3>Technical Challenges</h3>
+        <ul>
+            <li>
+                <strong>Time and Budget Constraints:</strong>
+                Developed three functional prototypes within a three-month
+                schedule and limited per-device budget, restricting component
+                selection and enclosure design.
+            </li>
+
+            <li>
+                <strong>Hardware and Software Integration:</strong>
+                Integrated GNSS, LoRa, IMU, OLED, and rotary encoder
+                functionality while troubleshooting peripheral communication
+                and initialization issues.
+            </li>
+
+            <li>
+                <strong>Manual Assembly:</strong>
+                Arranged components and routed wiring while maintaining
+                consistent electrical connections across three prototypes.
+            </li>
+
+            <li>
+                <strong>Communication Range:</strong>
+                Evaluated LoRa performance under outdoor conditions where
+                obstructions affected coverage. Demonstrated communication
+                at 958 m, slightly below the 1 km requirement.
+            </li>
+        </ul>
+        
+        <h3>Key Takeaways</h3>
+        <p>
+            This project strengthened my skills in embedded C++ development,
+            peripheral integration, finite state machines, wireless
+            communication protocols, and hardware debugging. Working
+            through system integration and verification also provided
+            practical experience developing and testing a complete
+            embedded system against engineering requirements.
+        </p>
+
+        <p><a href="projects.html">&larr; Back to Projects</a></p>
+    </section>
+    <footer><p>&copy; 2026 Trevor Fune</p></footer>
+
+
+    <script>
+        const images = [
+            {
+                src: "images/off-grid-tracking.png",
+                alt: "Tracking screen showing distance and direction"
+            },
+            {
+                src: "images/off-grid-member-list.jpeg",
+                alt: "Member list screen for selecting a group member"
+            },
+            {
+                src: "images/off-grid-location-unavailable.jpeg",
+                alt: "Location Unavailable screen"
+            },
+            {
+                src: "images/off-grid-startup-screen.jpeg",
+                alt: "Startup screen"
+            }
+        ];
+
+        let currentImage = 0;
+
+        const carouselImage = document.getElementById("carousel-image");
+
+        function updateCarousel() {
+            carouselImage.src = images[currentImage].src;
+            carouselImage.alt = images[currentImage].alt;
+        }
+
+        document.querySelector(".next").addEventListener("click", () => {
+            currentImage = (currentImage + 1) % images.length;
+            updateCarousel();
+        });
+
+        document.querySelector(".prev").addEventListener("click", () => {
+            currentImage = (currentImage - 1 + images.length) % images.length;
+            updateCarousel();
+        });
+    </script>
+
+</body>
+</html>
