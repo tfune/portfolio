@@ -22,37 +22,58 @@
 
     <section>
         <h2>Projects</h2>
-        <div class="project-grid">
+        <div class="project-grid">  
             <div class="project">
-                <h3><a href="project-stm32-golf-caddy.html">STM32 Golf Caddy <span style="font-size:0.7em; font-weight:normal; color:#64748b;">— In Progress</span></a></h3>
+                <h3>
+                    <a href="project-off-grid-location-sharing.html">
+                        Off-Grid Location Sharing System
+                    </a>
+                </h3>
 
                 <p>
-                    <img src="images/golf_caddy_golf_screen.jpeg"
-                         alt="STM32 Golf Caddy prototype"
-                         width="400">
+                    <img src="images/off-grid-tracking.png"
+                        alt="Off-Grid Location Sharing System"
+                        width="400">
                 </p>
 
                 <p>
-                    In-progress handheld embedded system built around an STM32U083RC. Current firmware
-                    includes a custom BME280 sensor interface and SSD1309 OLED driver over I2C, with
-                    hardware debugging performed using a logic analyzer and multimeter. GPS, battery
-                    monitoring, golf-course distance information, and a custom PCB are planned next.
+                    Three-device embedded system enabling off-grid
+                    location sharing using GNSS and LoRa communication.
+                    Integrates IMU-based directional tracking, an interactive
+                    OLED interface, and one-hop packet relaying. Demonstrated
+                    communication at 958 m with over 24 hours of battery life.
                 </p>
 
                 <p class="tags">
-                    <span>STM32</span>
-                    <span>Embedded C</span>
-                    <span>I2C</span>
-                    <span>BME280</span>
-                    <span>OLED</span>
-                    <span>STM32 HAL</span>
+                    <span>nRF52840</span>
+                    <span>C++</span>
+                    <span>LoRa</span>
+                    <span>GNSS</span>
+                    <span>IMU</span>
+                    <span>PlatformIO</span>
                 </p>
 
                 <div class="project-links">
-                    <a href="project-stm32-golf-caddy.html" class="button">Project Details</a>
+                    <a href="project-off-grid-location-sharing.html"
+                    class="button">
+                        Project Details
+                    </a>
+
+                    <a href="https://youtu.be/mXGF2UJDbLo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="button">
+                        Watch Demo
+                    </a>
+
+                    <a href="https://github.com/tfune/Off_Grid_Locator"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="button">
+                        View GitHub
+                    </a>
                 </div>
             </div>
-
 
             <div class="project">
                 <h3><a href="project-fuel-pump.html">Embedded Fuel Pump System</a></h3>
